@@ -1,5 +1,6 @@
-import Htag from "../components/Htag/Htag";
-import Button from "../components/Button/Button";
+import Htag from "../components/ui-atoms/Htag/Htag";
+import Button from "../components/ui-atoms/Button/Button";
+import Rating from "../components/Rating/Rating";
 
 export default function Home() {
   return (
@@ -11,6 +12,7 @@ export default function Home() {
       <Button appearance="ghost" arrow="down">
         Button
       </Button>
+      <Rating rating={4} isEditable />
     </div>
   );
 }
