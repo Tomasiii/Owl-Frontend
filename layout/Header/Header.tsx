@@ -1,13 +1,11 @@
-import { ButtonHTMLAttributes, DetailedHTMLProps } from "react";
+import { HeaderProps } from './Header.props';
+import styles from './Header.module.css';
+import cn from 'classnames';
 
-interface IProps
-  extends DetailedHTMLProps<
-    ButtonHTMLAttributes<HTMLDivElement>,
-    HTMLDivElement
-  > {}
-
-const Header = ({ ...props }: IProps) => {
-  return <header {...props}>Header</header>;
+export const Header = ({ ...props }: HeaderProps): JSX.Element => {
+	return (
+		<div {...props}>
+			Header
+		</div>
+	);
 };
-
-export default Header;

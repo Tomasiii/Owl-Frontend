@@ -1,32 +1,33 @@
-import React, { FunctionComponent, ReactNode } from "react";
-import Sidebar from "./Sidebar/Sidebar";
-import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
-import style from "./layout.module.css";
+import { LayoutProps } from './Layout.props';
+import styles from './Layout.module.css';
+import cn from 'classnames';
+import { Header } from './Header/Header';
+import React, { FunctionComponent } from 'react';
+import { Sidebar } from './Sidebar/Sidebar';
+import { Footer } from './Footer/Footer';
+import { AppContextProvider, IAppContext } from '../context/app.context';
 
-interface IProps {
-  children: ReactNode;
-}
-
-export const Layout = ({ children }: IProps): JSX.Element => {
-  return (
-    <div className={style.wrapper}>
-      <Header className={style.header} />
-      <Sidebar className={style.sidebar} />
-      <div className={style.body}>{children}</div>
-      <Footer className={style.footer} />
-    </div>
-  );
+const Layout = ({ children }: LayoutProps): JSX.Element => {
+	return (
+		<div className={styles.wrapper}>
+			<Header className={styles.header} />
+			<Sidebar className={styles.sidebar} />
+			<div className={styles.body}>
+				{children}
+			</div>
+			<Footer className={styles.footer} />
+		</div>
+	);
 };
 
-export const withLayout = <T extends Record<string, unknown>>(
-  Component: FunctionComponent<T>
-) => {
-  return function withLayoutComponent(props: T): JSX.Element {
-    return (
-      <Layout>
-        <Component {...props} />
-      </Layout>
-    );
-  };
+export const withLayout = <T extends Record<string, unknown> & IAppContext>(Component: FunctionComponent<T>) => {
+	return function withLayoutComponent(props: T): JSX.Element {
+		return (
+			<AppContextProvider menu={props.menu} firstCategory={props.firstCategory}>
+				<Layout>
+					<Component {...props} />
+				</Layout>
+			</AppContextProvider>
+		);
+	};
 };
