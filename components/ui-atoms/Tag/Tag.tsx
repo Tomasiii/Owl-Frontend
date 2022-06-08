@@ -1,4 +1,4 @@
-import styles from "./Tag.module.css";
+import styles from "./tag.module.css";
 import cn from "classnames";
 import { DetailedHTMLProps, HTMLAttributes, ReactNode } from "react";
 
